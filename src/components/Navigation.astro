@@ -1,0 +1,25 @@
+---
+import navData from '@/data/nav-data'
+import MobileMenu from './MobileMenu.astro'
+import { Icon } from 'astro-icon/components'
+---
+
+<div class="flex items-center gap-4">
+  <MobileMenu />
+
+  <a href="/">
+    <Icon name="mdi:github" class="w-8 h-8" />
+  </a>
+
+  <ul class="hidden md:flex items-center gap-4">
+    {
+      navData.map((item) => (
+        <li class="flex items-center">
+          <a href={item.href} class="py-1.5 px-2 rounded-lg hover:bg-hover-back transition-colors">
+            {item.name}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

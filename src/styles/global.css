@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 引入字体 */
+@font-face {
+  font-family: 'Selawik';
+  src: url('../assets//fonts/selawk.woff2') format('woff2'),
+    /* 优先加载 WOFF2 */ url('../assets/fonts/selawk.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Selawik';
+  src: url('../assets/fonts/selawksb.woff2') format('woff2'),
+    url('../assets/fonts/selawksb.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Selawik';
+  src: url('../assets/fonts/selawkb.woff2') format('woff2'),
+    url('../assets/fonts/selawkb.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* 颜色自定义，这些颜色都来自于GitHub官网 */
+:root {
+  --color-primary: #0969da;
+  --color-hf: #f6f8fa; /* header和footer的背景色 */
+  --color-content-primary: #1f2328; /* 主要文字颜色 */
+  --color-content-secondary: #59636e;
+  --color-back: #fff; /* 最底层背景颜色，用于body标签 */
+  --color-hover-back: #818b981a; /* hover效果背景色 */
+  --color-br: #d1d9e0;
+}
+html.dark {
+  --color-primary: #4493f8;
+  --color-hf: #010409;
+  --color-back: #0d1117;
+  --color-content-primary: #f0f6fc;
+  --color-content-secondary: #9198a1;
+  --color-hover-back: #656c7633;
+  --color-br: #3d444d;
+}
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-hf: var(--color-hf);
+  --color-content-primary: var(--color-content-primary);
+  --color-content-secondary: var(--color-content-secondary);
+  --color-back: var(--color-back);
+  --color-hover-back: var(--color-hover-back);
+  --color-br: var(--color-br);
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+    font-family: 'Selawik', sans-serif;
+  }
+
+  body {
+    @apply min-h-screen grid grid-rows-[1fr_auto] bg-back;
+  }
+}
+
+@utility container-global {
+  @apply h-full max-w-7xl w-full mx-auto;
+}

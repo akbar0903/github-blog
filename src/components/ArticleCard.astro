@@ -1,0 +1,45 @@
+---
+import { Icon } from 'astro-icon/components'
+
+interface Props {
+  title: string
+  url: string
+  category: string | null
+  description: string | null
+  tags: string[] | null
+  date: string
+}
+const { title, url, category, description, tags, date } = Astro.props as Props
+---
+
+<div class="bg-back border border-br rounded-md shadow-sm p-4">
+  <div class="flex flex-col gap-2">
+    <div class="flex justify-between items-center">
+      <a href={url} class="text-base font-semibold text-primary line-clamp-2">
+        <span>{title}</span>
+      </a>
+      {
+        category && (
+          <span class="inline-flex items-center rounded-md px-2 py-1 text-xs text-content-secondary border border-br bg-hover-back dark:bg-back">
+            {category}
+          </span>
+        )
+      }
+    </div>
+    <p class="text-content-secondary text-xs mb-1.5 line-clamp-2">{description}</p>
+    <div class="flex items-center flex-wrap gap-2 text-xs text-content-secondary">
+      {
+        tags?.map((tag) => (
+          <div class="flex items-center">
+            <span class="w-2.5 h-2.5 mr-1 inline-block rounded-full bg-primary" />
+            <span>{tag}</span>
+          </div>
+        ))
+      }
+      <div class="flex items-center text-xs text-content-secondary">
+        <Icon name="mdi:calendar-range-outline" class="w-4 h-4 pr-0.5" />
+        <span>{date}</span>
+      </div>
+    </div>
+  </div>
+</div>

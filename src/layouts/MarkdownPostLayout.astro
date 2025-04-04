@@ -1,0 +1,12 @@
+---
+import Layout from './Layout.astro'
+
+const { frontmatter } = Astro.props
+---
+
+<Layout title={frontmatter.title}>
+  <meta charset="utf-8" />
+  <h1 class="text-3xl">{frontmatter.title}</h1>
+  <p class="font-bold">作者：{frontmatter.author}</p>
+  <slot />
+</Layout>

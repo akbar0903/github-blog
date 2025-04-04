@@ -1,0 +1,58 @@
+---
+import type Frontmatter from '@/data/Frontmatter'
+import Layout from '@/layouts/Layout.astro'
+import type { MarkdownInstance } from 'astro'
+import { Icon } from 'astro-icon/components'
+
+type Post = MarkdownInstance<Frontmatter>
+
+interface StaticPath {
+  params: { tag: string }
+  props: { posts: Post[] }
+}
+
+// 当页面初次加载时执行，返回一个数组，包含标签对应的文章
+export async function getStaticPaths(): Promise<StaticPath[]> {
+  // 获取所有文章
+  const allPost = await Astro.glob<Frontmatter>('../posts/*.md')
+
+  // 获取所有标签（去重）
+  const tags = allPost.flatMap((post) => post.frontmatter.tags)
+  const uniqueTags = [...new Set(tags)]
+
+  // 获取标签对应的文章
+  return uniqueTags.map((tag) => ({
+    params: { tag },
+    props: {
+      posts: allPost.filter((post) => post.frontmatter.tags.includes(tag)),
+    },
+  }))
+}
+
+// 获取要查看的标签
+const { tag } = Astro.params
+
+// 获取所有文章
+const { posts } = Astro.props
+---
+
+<Layout title={`标签：${tag}`}>
+  <div class="flex flex-col gap-3 p-4">
+    <h3 class="flex items-center gap-1 text-lg md:text-xl font-semibold text-primary">
+      <Icon name="mdi:tag-multiple" />
+      <span>{tag}</span>
+    </h3>
+
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {
+        posts.map((post) => (
+          <li class="flex items-center gap-2 p-4 bg-back border border-br rounded-md shadow-sm">
+            <a href={`${post.url}`} class="text-primary">
+              {post.frontmatter.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Layout>

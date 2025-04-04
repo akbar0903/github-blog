@@ -1,0 +1,15 @@
+<footer class="w-full h-14 md:h-16 text-content-secondary">
+  <div class="container-global flex items-center justify-center">
+    <p class="text-xs">
+      Copyright &copy;
+      <span id="copyright"></span>
+      | All rights reserved
+    </p>
+  </div>
+</footer>
+
+<script>
+  (document.querySelector('#copyright') as HTMLElement).textContent = new Date()
+    .getFullYear()
+    .toString()
+</script>

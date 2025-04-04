@@ -1,11 +1,44 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import AuthorCard from '@/components/AuthorCard.astro'
+import ArticleCard from '@/components/ArticleCard.astro'
+import Layout from '@/layouts/Layout.astro'
+import TagCard from '@/components/TagCard.astro'
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// 获取所有的博客文章
+const allPosts = await Astro.glob('./posts/*.md')
+
+// 获取所有标签（不重复）
+const allTags = allPosts.map((post) => post.frontmatter.tags)
+const flatTags = allTags.flat()
+// 去重
+const uniqueTags = [...new Set(flatTags)]
 ---
 
 <Layout>
-	<Welcome />
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-4">
+    <div>
+      <AuthorCard />
+    </div>
+
+    <div class="md:col-span-3">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {
+          allPosts.map((post) => (
+            <ArticleCard
+              title={post.frontmatter.title}
+              url={post.url as string}
+              category={post.frontmatter.category}
+              tags={post.frontmatter.tags}
+              description={post.frontmatter.description}
+              date={post.frontmatter.date}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <TagCard tags={uniqueTags} />
+    </div>
+  </div>
 </Layout>

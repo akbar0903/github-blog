@@ -1,0 +1,15 @@
+---
+import Navigation from '@/components/Navigation.astro'
+import ThemeToggle from '@/components/ThemeToggle.astro'
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-10 h-14 md:h-16 text-base bg-hf shadow-xs border-b border-b-br"
+>
+  <nav
+    class="container-global flex items-center justify-between px-4 text-content-primary font-semibold"
+  >
+    <Navigation />
+    <ThemeToggle />
+  </nav>
+</header>
