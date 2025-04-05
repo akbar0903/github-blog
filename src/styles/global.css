@@ -65,6 +65,41 @@ html.dark {
   body {
     @apply min-h-screen grid grid-rows-[1fr_auto] bg-back;
   }
+
+  article {
+    @apply w-full md:col-span-3 card-style md:px-8 !max-w-none;
+
+    /* Typography 基础 */
+    @apply prose md:prose-lg dark:prose-invert;
+
+    /* 标题大小调整 */
+    @apply prose-h1:text-xl md:prose-h1:text-2xl lg:prose-h1:text-3xl;
+    @apply prose-h2:text-lg md:prose-h2:text-xl lg:prose-h2:text-2xl prose-h2:my-4;
+    @apply prose-h3:text-base md:prose-h3:text-lg lg:prose-h3:text-xl prose-h3:my-4;
+    @apply prose-h4:text-sm md:prose-h4:text-base lg:prose-h4:text-lg;
+
+    /* 段落 spacing 和内容符号去除 */
+    @apply prose-p:mb-4 prose-p:before:content-none prose-p:after:content-none;
+
+    /* 引用块样式 */
+    @apply prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:bg-hover-back prose-blockquote:my-4;
+
+    /* 无序列表间距优化 */
+    @apply prose-ul:my-2 prose-li:!my-0;
+
+    /* ol 有序列表样式 */
+    @apply prose-ol:my-2 prose-li:!my-0;
+
+    /* 行内代码样式 */
+    @apply prose-code:before:content-none prose-code:after:content-none;
+    @apply prose-code:bg-hover-back prose-code:p-0.5 prose-code:rounded-md;
+
+    /* 代码块样式 */
+    @apply prose-pre:p-0 prose-pre:my-4 prose-pre:rounded-lg;
+
+    /* 水平线样式 */
+    @apply prose-hr:my-4;
+  }
 }
 
 @utility container-global {
@@ -75,11 +110,3 @@ html.dark {
   @apply bg-back p-4 border border-br rounded-md shadow-sm;
 }
 
-/*prismjs样式*/
-.astro-code {
-  @apply !p-4;
-}
-.astro-code code {
-  @apply !bg-transparent !text-base;
-  font-family: 'JetBrains Mono', sans-serif;
-}

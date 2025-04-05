@@ -18,7 +18,9 @@ import { Icon } from 'astro-icon/components'
     class="fixed top-0 left-0 z-20 h-screen max-w-[320px] w-full -translate-x-full transition-transform duration-300 ease-in-out bg-back rounded-r-xl"
   >
     <div class="flex items-center justify-between w-full p-4">
-      <Icon name="mdi:github" class="w-8 h-8" />
+     <a href="/">
+       <Icon name="mdi:github" class="w-8 h-8" />
+     </a>
       <button id="menu-close" class="p-2 bg-hover-back rounded-md font-semibold cursor-pointer"
         ><svg
           class="w-4 fill-content-secondary"
@@ -39,7 +41,7 @@ import { Icon } from 'astro-icon/components'
         {
           navData.map((item) => (
             <li>
-              <a href={item.href} class="flex items-center gap-2">
+              <a href={item.href} class="flex text-lg items-center gap-2 font-semibold">
                 <Icon name={item.icon} class="w-4 h-4" />
                 <span>{item.name}</span>
               </a>

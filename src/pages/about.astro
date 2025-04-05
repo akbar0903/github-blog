@@ -1,32 +1,73 @@
 ---
 import Layout from '@/layouts/Layout.astro'
+import { Icon } from "astro-icon/components"
 ---
 
-<Layout title="about page">
-    <div class="max-w-4xl mx-auto p-6 space-y-6">
-        <h1 class="text-3xl font-bold text-primary">你好，我叫张三</h1>
-        <p class="text-lg text-gray-700">
-            我是一名前端开发工程师，专注于构建高性能、响应式的用户界面。我对新技术充满热情，并且有着扎实的编程基础。
-        </p>
-        <div class="text-gray-600">
-            <h2 class="text-xl font-bold">联系方式</h2>
-            <ul class="list-disc pl-6">
-                <li>Email: zhangsan@example.com</li>
-                <li>GitHub: <a href="https://github.com/zhangsan" class="text-primary hover:underline">zhangsan</a></li>
-                <li>LinkedIn: <a href="https://linkedin.com/in/zhangsan" class="text-primary hover:underline">zhangsan</a></li>
-            </ul>
-        </div>
-        <div class="text-gray-600">
-            <h2 class="text-xl font-bold">本项目技术栈</h2>
-            <p class="text-lg">
-                本项目使用了以下技术栈:
-            </p>
-            <ul class="list-disc pl-6">
-                <li>React</li>
-                <li>Tailwind CSS</li>
-                <li>Next.js</li>
-                <li>GraphQL</li>
-            </ul>
+<Layout title="关于我">
+    <div class="max-w-4xl mx-auto">
+        <!-- 主卡片容器 -->
+        <div class="bg-back mx-1 my-4 card-style">
+
+            <div class="p-6 space-y-8">
+                <!-- 自我介绍部分 -->
+                <div class="space-y-6">
+                    <h1 class="text-4xl md:text-5xl font-bold text-primary">
+                        你好，我是艾克
+                    </h1>
+
+                    <div class="prose prose-lg dark:prose-invert max-w-none">
+                        <p class="text-content-primary">
+                            欢迎访问我的博客！我是一名普通的计算机专业学生，热爱分享与探索新技术。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 联系信息卡片 -->
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-primary mb-4 flex items-center">
+                        <Icon name="mdi:phone-outline" class="w-8 h-8 mr-1"/>
+                        联系我
+                    </h2>
+
+                    <ul class="space-y-3 text-content-primary">
+                        <li class="flex items-center">
+                            <Icon name="mdi:email-outline" class="w-4.5 h-4.5 mr-1"/>
+                            Email: <a href="#" class="text-primary ml-2">akbar4857@qq.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <Icon name="mdi:github" class="w-4.5 h-4.5 mr-1"/>
+                            GitHub: <a href="#" class="text-primary ml-2" target="_blank">QuietCoder0903</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 技术栈部分 -->
+                <div class="space-y-4">
+                    <h2 class="text-2xl font-bold text-primary flex items-center">
+                        <Icon name="mdi:memory" class="w-8 h-8 mr-1"/>
+                        技术栈
+                    </h2>
+
+                    <p class="text-content-secondary">
+                        本项目使用以下技术构建:
+                    </p>
+
+                    <div class="flex flex-wrap gap-3">
+            <span class="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium flex items-center">
+              <span class="w-2 h-2 bg-primary rounded-full mr-2"></span>
+              Astro
+            </span>
+                        <span class="px-4 py-2 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300 rounded-full text-sm font-medium flex items-center">
+              <span class="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+              Tailwind CSS
+            </span>
+                        <span class="px-4 py-2 bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300 rounded-full text-sm font-medium flex items-center">
+              <span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span>
+              TypeScript
+            </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </Layout>
