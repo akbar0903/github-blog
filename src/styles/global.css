@@ -1,10 +1,11 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* 引入字体 */
 @font-face {
   font-family: 'Selawik';
-  src: url('../assets//fonts/selawk.woff2') format('woff2'),
+  src: url('../assets/fonts/selawk.woff2') format('woff2'),
     /* 优先加载 WOFF2 */ url('../assets/fonts/selawk.woff') format('woff');
   font-weight: 400;
   font-style: normal;
@@ -68,4 +69,17 @@ html.dark {
 
 @utility container-global {
   @apply h-full max-w-7xl w-full mx-auto;
+}
+
+@utility card-style {
+  @apply bg-back p-4 border border-br rounded-md shadow-sm;
+}
+
+/*prismjs样式*/
+.astro-code {
+  @apply !p-4;
+}
+.astro-code code {
+  @apply !bg-transparent !text-base;
+  font-family: 'JetBrains Mono', sans-serif;
 }

@@ -10,4 +10,10 @@ export default defineConfig({
   },
 
   integrations: [icon()],
+
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+    }
+  }
 })

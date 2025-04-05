@@ -1,0 +1,28 @@
+---
+import CollectionPage from '@/components/CollectionPage.astro'
+
+export async function getStaticPaths() {
+  // 获取所有文章
+  const allPost = Object.values(import.meta.glob('../posts/*.md', { eager: true }))
+
+  // 获取所有category（去重）
+  const allCategories = allPost.map((post: any) => post.frontmatter.category)
+  const uniqueCategories = [...new Set(allCategories)]
+
+  // 获取分类对应的文章
+  return uniqueCategories.map((category) => ({
+    params: { category },
+    props: {
+      posts: allPost.filter((post: any) => post.frontmatter.category.includes(category)),
+    },
+  }))
+}
+
+// 获取要查看的分类
+const { category } = Astro.params
+
+// 获取所有文章
+const { posts } = Astro.props
+---
+
+<CollectionPage type="category" name={category} posts={posts} />

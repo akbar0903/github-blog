@@ -12,7 +12,7 @@ interface Props {
 const { title, url, category, description, tags, date } = Astro.props as Props
 ---
 
-<div class="bg-back border border-br rounded-md shadow-sm p-4">
+<div class="card-style">
   <div class="flex flex-col gap-2">
     <div class="flex justify-between items-center">
       <a href={url} class="text-base font-semibold text-primary line-clamp-2">

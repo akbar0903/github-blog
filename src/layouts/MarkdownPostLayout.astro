@@ -4,9 +4,17 @@ import Layout from './Layout.astro'
 const { frontmatter } = Astro.props
 ---
 
-<Layout title={frontmatter.title}>
-  <meta charset="utf-8" />
-  <h1 class="text-3xl">{frontmatter.title}</h1>
-  <p class="font-bold">作者：{frontmatter.author}</p>
-  <slot />
+<Layout title={ frontmatter.title }>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 py-4 px-1">
+        <article
+                class="w-full md:col-span-3 card-style md:p-6 max-w-none prose md:prose-lg dark:prose-invert prose-pre:p-0 prose-pre:my-4 prose-pre:rounded-lg prose-h1:text-xl md:prose-h1:text-2xl lg:prose-h1:text-3xl prose-h2:text-lg md:prose-h2:text-xl lg:prose-h2:text-2xl prose-h3:text-base md:prose-h3:text-lg lg:prose-h3:text-xl prose-h4:text-sm md:prose-h4:text-base lg:prose-h4:text-lg prose-p:before:content-none prose-p:after:content-none prose-p:my-2 prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-ul:my-2 prose-li:my-2 prose-code:before:content-none prose-code:after:content-none prose-code:bg-hover-back prose-code:p-0.5 prose-code:rounded-md">
+            <slot/>
+        </article>
+
+        <div class="hidden md:block w-full md:col-span-1">
+            <div class="card-style">
+
+            </div>
+        </div>
+    </div>
 </Layout>
