@@ -14,13 +14,13 @@ const { title, url, category, description, tags, date } = Astro.props as Props
 
 <div class="card-style">
   <div class="flex flex-col gap-2">
-    <div class="flex justify-between items-center">
+    <div class="flex justify-between items-start gap-2">
       <a href={url} class="text-lg font-semibold text-primary line-clamp-2">
         <span>{title}</span>
       </a>
       {
         category && (
-          <span class="inline-flex items-center rounded-md px-2 py-1 text-xs text-content-secondary border border-br bg-hover-back dark:bg-back">
+          <span class="inline-flex items-center rounded-md px-2 py-1 text-xs text-content-secondary border border-br bg-hover-back dark:bg-back text-nowrap">
             {category}
           </span>
         )

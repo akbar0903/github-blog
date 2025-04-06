@@ -5,16 +5,18 @@ import projectData from "../data/project-data"
 ---
 
 <Layout title="project page">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-        {
-            projectData.map((project) => (
-                    <div class="card-style flex items-center justify-between text-lg text-primary font-semibold">
-                        <h2>{ project.title }</h2>
-                        <a href={ project.href }>
-                            <Icon name={ project.icon } class='h-6 w-6 fill-current' />
-                        </a>
-                    </div>
-            ))
-        }
+    <div class="max-w-5xl mx-auto my-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mx-4">
+            {
+                projectData.map((project) => (
+                        <div class="card-style flex items-center justify-between text-lg text-primary font-semibold">
+                            <h2>{ project.title }</h2>
+                            <a href={ project.href }>
+                                <Icon name={ project.icon } class='h-6 w-6 fill-current'/>
+                            </a>
+                        </div>
+                ))
+            }
+        </div>
     </div>
 </Layout>

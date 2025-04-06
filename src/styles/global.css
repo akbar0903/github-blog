@@ -78,14 +78,14 @@ html.dark {
     @apply prose-h3:text-base md:prose-h3:text-lg lg:prose-h3:text-xl prose-h3:my-4;
     @apply prose-h4:text-sm md:prose-h4:text-base lg:prose-h4:text-lg;
 
-    /* 段落 spacing 和内容符号去除 */
-    @apply prose-p:mb-4 prose-p:before:content-none prose-p:after:content-none;
+    /* 段落p标签 */
+    @apply prose-p:my-3 prose-p:before:content-none prose-p:after:content-none;
 
     /* 引用块样式 */
     @apply prose-blockquote:border-l-4 prose-blockquote:border-l-primary prose-blockquote:bg-hover-back prose-blockquote:my-4;
 
-    /* 无序列表间距优化 */
-    @apply prose-ul:my-2 prose-li:!my-0;
+    /* ul无序列表样式 */
+    @apply prose-ul:my-2 prose-li:!my-0 prose-li:pl-0;
 
     /* ol 有序列表样式 */
     @apply prose-ol:my-2 prose-li:!my-0;
@@ -110,3 +110,15 @@ html.dark {
   @apply bg-back p-4 border border-br rounded-md shadow-sm;
 }
 
+/* 目录卡片 */
+/* 滚动条美化 */
+.toc-wrapper::-webkit-scrollbar {
+  @apply w-1;
+}
+.toc-wrapper::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-md;
+}
+/* TOC选中状态高亮 */
+#toc-container a.active {
+  @apply text-primary;
+}

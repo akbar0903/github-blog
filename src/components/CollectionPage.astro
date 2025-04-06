@@ -39,9 +39,9 @@ const currentConfig = config[type]
             <a href={`${post.url}`} class="text-primary font-semibold line-clamp-2">
               {post.frontmatter.title}
             </a>
-            <div class="flex items-center text-content-secondary">
-              <Icon name="mdi:calendar-range-outline" class="h-4 w-4 pr-0.5" />
-              <span class="text-xs">{post.frontmatter.date}</span>
+            <div class="flex items-center text-xs text-content-secondary">
+              <Icon name="mdi:calendar-range-outline" class="text-sm" />
+              <span>{post.frontmatter.date}</span>
             </div>
           </li>
         ))

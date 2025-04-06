@@ -1,0 +1,109 @@
+<div class="toc-wrapper">
+    <nav id="toc-container" class="space-y-1 pl-4">
+        <!-- 客户端动态生成内容 -->
+    </nav>
+</div>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. 构建层级结构（支持h1-h3）
+        const tocTree = [];
+        let currentH1 = null;
+        let currentH2 = null;
+
+        Array.from(document.querySelectorAll('article h1, article h2, article h3')).forEach((el, index) => {
+            const depth = parseInt(el.tagName.substring(1));
+            const item = {
+                text: el.textContent,
+                slug: el.id || `heading-${index}`,
+                depth: depth
+            };
+
+            // 构建树形结构
+            if (depth === 1) {
+                currentH1 = { ...item, children: [] };
+                currentH2 = null;
+                tocTree.push(currentH1);
+            }
+            else if (depth === 2 && currentH1) {
+                currentH2 = { ...item, children: [] };
+                currentH1.children.push(currentH2);
+            }
+            else if (depth === 3 && currentH2) {
+                currentH2.children.push(item);
+            }
+
+            if (!el.id) el.id = item.slug;
+        });
+
+        // 2. 渲染函数（纯缩进层级）
+        const renderTOC = (items) => {
+            return items.map(item => `
+        <div class="toc-item level-${item.depth}">
+          <a href="#${item.slug}" class="
+            block py-1 text-sm transition-colors
+            ${item.depth === 1 ? 'font-bold text-content-primary' : ''}
+            ${item.depth === 2 ? 'font-medium text-content-primary' : ''}
+            ${item.depth === 3 ? 'font-normal text-content-secondary' : ''}
+            hover:text-primary
+          ">
+            ${item.text}
+          </a>
+          ${item.children?.length ? `
+            <div class="ml-4">${renderTOC(item.children)}</div>
+          ` : ''}
+        </div>
+      `).join('');
+        };
+
+        document.getElementById('toc-container').innerHTML = renderTOC(tocTree);
+
+        // 3. 交互逻辑
+        const activateToc = () => {
+            // 平滑滚动（修复特殊字符问题）
+            document.querySelectorAll('#toc-container a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const href = link.getAttribute('href');
+                    const id = href.slice(1); // 移除开头的#
+                    try {
+                        const target = document.querySelector(`#${CSS.escape(id)}`);
+                        if (target) {
+                            const headerHeight = document.querySelector('header')?.offsetHeight || 0;
+                            window.scrollTo({
+                                top: target.offsetTop - headerHeight - 20,
+                                behavior: 'smooth'
+                            });
+                        }
+                    } catch (e) {
+                        console.error('TOC导航失败:', e);
+                    }
+                });
+            });
+
+            // 滚动高亮（修复观察器错误）
+            const headings = document.querySelectorAll('article h1, article h2, article h3');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    const id = entry.target.id;
+                    try {
+                        const link = document.querySelector(`#toc-container a[href="#${CSS.escape(id)}"]`);
+                        link?.classList.toggle('active', entry.isIntersecting);
+                    } catch (e) {
+                        console.error('TOC高亮失败:', e);
+                    }
+                });
+            }, {
+                rootMargin: '-10% 0px -75% 0px',
+                threshold: 0.1
+            });
+
+            // 关键修复：遍历每个标题元素分别观察
+            headings.forEach(heading => {
+                observer.observe(heading); // ✔️ 正确用法
+            });
+        };
+
+        activateToc();
+    });
+</script>
